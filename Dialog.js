@@ -4,7 +4,6 @@
  */
 import React, {
     Component,
-    PropTypes
 } from 'react';
 import {
     View,
@@ -18,7 +17,7 @@ import {
     Text,
     Platform
 } from 'react-native';
-
+import PropTypes from 'prop-types';
 const isAndroid = Platform.OS === 'android';
 
 let {
@@ -66,7 +65,7 @@ export default class Dialog extends Component {
             dismissable,
             backgroundColor,
             maxHeight,
-            width, 
+            width,
         } = this.props;
 
         let leftActions, rightActions;
@@ -76,15 +75,15 @@ export default class Dialog extends Component {
         }
         return (
             this.state.visible && <Animated.View style={[styles.wrapper, { opacity: this.animatedVal }]}>
-                <TouchableWithoutFeedback onPress={() => dismissable && this.close() }>
-                    <View style={styles.dismissWrapper}/>
+                <TouchableWithoutFeedback onPress={() => dismissable && this.close()}>
+                    <View style={styles.dismissWrapper} />
                 </TouchableWithoutFeedback>
                 <Animated.View style={[styles.container, style, { opacity: this.animatedVal, transform: [{ scale: 1 }], width, maxHeight, backgroundColor }]}>
                     <Text style={[styles.title, { color: titleColor }]}>{title}</Text>
                     <View style={{ flex: 1 }}>
                         {children}
                     </View>
-                {actions && <View style={styles.footer}>
+                    {actions && <View style={styles.footer}>
                         <View style={{ flex: 1, flexDirection: 'row' }}>
                             {leftActions}
                         </View>
@@ -99,13 +98,13 @@ export default class Dialog extends Component {
 }
 
 const Touchable = (props, state) => (
-    isAndroid ? <TouchableNativeFeedback {...props} {...state}/> : <TouchableOpacity {...props} {...state}/>
+    isAndroid ? <TouchableNativeFeedback {...props} {...state} /> : <TouchableOpacity {...props} {...state} />
 )
 
 export const DialogButton = ({ text, onPress, color, disabled }) => (
-    <Touchable disabled={disabled} onPress={() => onPress() }>
+    <Touchable disabled={disabled} onPress={() => onPress()}>
         <View style={styles.dialogBtnContainer}>
-            <Text type='medium' style={[styles.dialogBtn, { color: color? color: disabled? '#bdbdbd':'#009688' }]}>{text}</Text>
+            <Text type='medium' style={[styles.dialogBtn, { color: color ? color : disabled ? '#bdbdbd' : '#009688' }]}>{text}</Text>
         </View>
     </Touchable>
 );
@@ -135,7 +134,7 @@ const styles = StyleSheet.create({
         opacity: 0,
         zIndex: 9999,
         elevation: 9999,
-        
+
     },
     dismissWrapper: {
         position: 'absolute',
@@ -181,7 +180,7 @@ const styles = StyleSheet.create({
     dialogBtn: {
         fontWeight: isAndroid ? '400' : '500',
         fontFamily: isAndroid ? 'sans-serif-medium' : 'System',
-        fontSize: isAndroid ? 14 : 13,        
+        fontSize: isAndroid ? 14 : 13,
     }
 })
 
